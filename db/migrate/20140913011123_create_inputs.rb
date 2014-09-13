@@ -5,7 +5,7 @@ class CreateInputs < ActiveRecord::Migration
       t.integer :user_id
       t.date :date
       t.string :name
-      t.integer :quality
+      t.string :quality
       t.date :exp_date
       t.integer :num_days
 
