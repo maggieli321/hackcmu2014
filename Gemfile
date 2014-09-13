@@ -32,7 +32,7 @@ gem 'validates_timeliness'
 
 gem 'chronic'
 
-gem 'bcrypt'
+gem 'bcrypt-ruby'
 
 gem 'cancancan', '1.7.0'
 
