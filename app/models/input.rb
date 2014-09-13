@@ -9,26 +9,32 @@ class Input < ActiveRecord::Base
 	validates_date :exp_date, on_or_after: Date.today, allow_blank: true
 	validates_inclusion_of :quality, in: %w[Excellent, Ok, Bad]
 
+	scope :upcoming, -> { where('date >= ?', Date.today) }
+	scope :past, -> { where('date <= ?', Date.today)}
+  	scope :rot, -> { where('date < ?', Date.today) }
+  	scope :chronological, -> { order('date') }
 
 
 
-def date
-	if !num_days.nil?
-		return Date.today + num_days
-	elsif !exp_date.nil? 
-		return exp_date
+
+	def date
+
+		if !num_days.nil?
+			return Date.today + num_days
+		elsif !exp_date.nil? 
+			return exp_date
+		else
+			case self.quality
+			when 0 # bad quality
+		    	modifier = 0.33
+			when 1 # ok quality
+		    	modifier = 0.67
+		 	else # excellent quality
+		    	modifier = 1.0
+		  	end
+		  	Date.today + self.food.shelf_life*modifier
+		end
 	end
-	else
-		case self.quality
-		when 0 # bad quality
-	    	modifier = 0.33
-		when 1 # ok quality
-	    	modifier = 0.67
-	 	else # excellent quality
-	    	modifier = 1.0
-	  	end
-	  	Date.today + self.food.shelf_life*modifier
-end
-
 
 end
+
