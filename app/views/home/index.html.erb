@@ -1,7 +1,6 @@
-<<<<<<< HEAD
-<h1>Home#index</h1>
-<p>Hello! We will help you keep track of your food so you will know when to eat it by!</p>
-=======
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
->>>>>>> 635a85998a33922da85a16751810f34d6d92ec81
+<% if logged_in?  %>
+	<%= render :partial => 'user_home' %>
+
+<% else %>
+	<%= render :partial => 'login_home' %>
+<% end %>
