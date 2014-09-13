@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 20140913055711) do
   create_table "inputs", force: true do |t|
     t.integer  "food_id"
     t.integer  "user_id"
-    t.date     "date"
+    t.datetime "date"
     t.string   "name"
     t.string   "quality"
     t.date     "exp_date"

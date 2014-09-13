@@ -7,7 +7,6 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<<<<<<< HEAD
  <% if logged_in? %>
     <%= link_to 'Logout', logout_path %>
     <br>[<%= current_user.username %>]
@@ -16,7 +15,6 @@
     <%= link_to 'Register', signup_path %>
   <% end %>
 <%= yield %>
-=======
 <%= render :partial => "partials/nav" %>
 
 <div class="row">
@@ -25,7 +23,6 @@
         <%= yield %>
      </div>
 </div>
->>>>>>> 635a85998a33922da85a16751810f34d6d92ec81
 
 </body>
 </html>
