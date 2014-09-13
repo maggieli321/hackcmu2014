@@ -9,8 +9,14 @@ class Ability
         can :manage, :all
       else
         can :read, Food
-        can :read, Input
-        can :manage, :all #change later
+        can :read, :update, :Input do |i|
+          inputs = user.inputs.map(&:user_id)
+          inputs.include?(i.id)
+        end
+
+        can :update, User do |u|
+          u.id == user.id
+        end
       end
     #
     # The first argument to `can` is the action you are giving the user
