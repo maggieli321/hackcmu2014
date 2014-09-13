@@ -14,11 +14,43 @@
  *= require_tree .
  */
 
-h2{
-	font-family: 'Lobster', cursive;
+#homepage{
+
+	text-align: center;
+	top: 320px;
+	border: 2px #000 hidden;
+	border-radius: 25px;
+	position: absolute;
+	background: rgba(255,255,255,0.5);
+	right: 200px;
+	padding: 20px;
 }
-.name{
-	height:40px;
+	
+nav.top-bar {
+	height: 60px;
+	
+}
+
+
+
+#home{
+	padding:30px;
+	font-size: 100px;
+	color:#33CC99;
+	font-family: 'Lobster', cursive;
+	text-shadow: 0px 0px 5px #fff;
+	opacity:1;
+}
+
+#homeside{
+	opacity: 1;
+font-size: 20px;
+color: #ffffff;
+font-weight: 400;
+}
+
+#main_content{
+	font-family: 'Ubuntu', sans-serif;
 }
 
 #background-image {
