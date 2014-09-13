@@ -12,6 +12,7 @@
     <br>[<%= current_user.username %>]
   <% else %>
     <%= link_to 'Login', login_path %>
+    <%= link_to 'Register', signup_path %>
   <% end %>
 <%= yield %>
 
