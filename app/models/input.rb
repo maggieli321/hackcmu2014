@@ -48,7 +48,6 @@ class Input < ActiveRecord::Base
 #     end
 #   end
 
-
 	def send_reminder
 		if Date.today == :expiration_date -1
 			ReminderMailer.food_reminder_msg(@user).deliver
@@ -56,5 +55,7 @@ class Input < ActiveRecord::Base
       	end
     end
 
+    after_save :send_reminder
+    after_update :send_reminder
 end
 

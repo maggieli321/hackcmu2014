@@ -7,13 +7,15 @@ class UsersController < ApplicationController
   # GET /users.json
   def index
     @users = User.all
-    @reminder = ReminderMailer.food_reminder_msg(@user).deliver
+    
       #flash[:notice] = "#{@user.username} has been notified by email."
   end
 
   # GET /users/1
   # GET /users/1.json
   def show
+    @user = current_user
+    @reminder = ReminderMailer.food_reminder_msg(@user).deliver
   end
 
   # GET /users/new
