@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Food:</strong>
+  <%= @input.food_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @input.user_id %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @input.date %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @input.name %>
+</p>
+
+<p>
+  <strong>Quality:</strong>
+  <%= @input.quality %>
+</p>
+
+<p>
+  <strong>Exp date:</strong>
+  <%= @input.exp_date %>
+</p>
+
+<p>
+  <strong>Num days:</strong>
+  <%= @input.num_days %>
+</p>
+
+<%= link_to 'Edit', edit_input_path(@input) %> |
+<%= link_to 'Back', inputs_path %>

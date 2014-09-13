@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  food_id: 1
+  user_id: 1
+  date: 2014-09-12 21:11:23
+  name: MyString
+  quality: 1
+  exp_date: 2014-09-12
+  num_days: 1
+
+two:
+  food_id: 1
+  user_id: 1
+  date: 2014-09-12 21:11:23
+  name: MyString
+  quality: 1
+  exp_date: 2014-09-12
+  num_days: 1

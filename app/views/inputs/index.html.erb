@@ -1,0 +1,39 @@
+<h1>Listing inputs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Food</th>
+      <th>User</th>
+      <th>Date</th>
+      <th>Name</th>
+      <th>Quality</th>
+      <th>Exp date</th>
+      <th>Num days</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @inputs.each do |input| %>
+      <tr>
+        <td><%= input.food_id %></td>
+        <td><%= input.user_id %></td>
+        <td><%= input.date %></td>
+        <td><%= input.name %></td>
+        <td><%= input.quality %></td>
+        <td><%= input.exp_date %></td>
+        <td><%= input.num_days %></td>
+        <td><%= link_to 'Show', input %></td>
+        <td><%= link_to 'Edit', edit_input_path(input) %></td>
+        <td><%= link_to 'Destroy', input, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Input', new_input_path %>
