@@ -34,7 +34,12 @@ class InputsController < ApplicationController
     # authorize! :create, @input
     @input = Input.new(input_params)
     if @input.save
+
+     # ReminderMailer.food_reminder_msg(User.to_a.select{|c| c.user_id = @input.user_id}).deliver
+      
+      
       redirect_to @input, notice: "The nom #{@input.name} was added to the system."
+      ReminderMailer.food_reminder_msg(@input.user).deliver
     else
       render action: 'new'
     end
