@@ -6,9 +6,9 @@
 
         var data = google.visualization.arrayToDataTable([
           ['Food', 'Percentage'],
-          ['Rot',     10],
+          ['Fresh',     30],
           ['Danger',   3],
-          ['Fresh',  30]
+          ['Rot',  5]
         ]);
 
         var options = {
@@ -50,7 +50,7 @@
     <% if !@upcoming_inputs.blank? %>
     <% @upcoming_inputs.each do |input| %>
       <tr>
-        <td><%= link_to input.name, input %></td>
+        <td><%= link_to input.food.name, input %></td>
         <td><%= input.quality %></td>
         <td><%= input.exp_date %></td>
         <td><%= link_to 'Edit', edit_input_path(input) %></td>

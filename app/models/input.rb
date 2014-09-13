@@ -3,8 +3,9 @@ class Input < ActiveRecord::Base
 	belongs_to :food
 	belongs_to :user
 
-	validates_presence_of :user_id, :qualitys
-	validates_numericality_of :food_id, :user_id, greater_than: 0, only_integer: true
+
+	validates_presence_of :user_id, :quality
+	validates_numericality_of :food_id, greater_than: 0, only_integer: true
 	validates_date :date, on_or_after: Date.today
 	validates_date :exp_date, on_or_after: Date.today, allow_blank: true, allow_nil: true
 	validates_inclusion_of :quality, in: %w[Excellent Ok Bad]
@@ -36,21 +37,22 @@ class Input < ActiveRecord::Base
 
 	after_save :send_reminder
     after_update :send_reminder
+
     before_validation :assign_expiration_date
-    before_validation :assign_user
+    # before_validation :assign_user
 
     def assign_expiration_date
     	self.date = :expiration_date
     end
 
-    def assign_user
-    	self.user = @user
-    end
+
+    # def assign_user
+    # 	self.user = @user
+    # end
 
 	def date
 		expiration_date
 	end
-
 
 # private
 #   def input_is_not_already_assigned_to_food
@@ -61,7 +63,7 @@ class Input < ActiveRecord::Base
 #   end
 
 	def send_reminder
-		if Date.today == :expiration_date -1
+		if Date.today == expiration_date - 1
 			ReminderMailer.food_reminder_msg(@user).deliver
       		flash[:notice] = "#{@user.username} has been notified by email." 
       	end

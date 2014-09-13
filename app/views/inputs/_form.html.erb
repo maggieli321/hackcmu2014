@@ -1,3 +1,5 @@
+
+
 <%= simple_form_for(@input) do |f| %>
   <% if @input.errors.any? %>
     <div id="error_explanation">
@@ -13,8 +15,9 @@
 
 <%# IF the item is not already in the food system%>
   <%# if @input.input_is_not_already_assigned_to_food == "true" %>
-
-        <%= f.input :name,  required: false, label: "Name" %> 
+        <div class="field">
+        <%= f.input :user_id, collection: User.all.map{|u| u.id}, prompt: "Select user" %>
+        </div>
         <div class="field">
           <%= f.label :name, label: "Food" %><br>
           <%= f.select :food_id, Food.all.map{|e| [e.name, e.id]}, prompt: "I have...", required: false %>
@@ -40,25 +43,6 @@
         <div class="actions">
           <%= f.submit %>
         </div>
-  <%# else %>
-
-  <%# end %>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <% end %>
+
