@@ -3,16 +3,12 @@
 <head>
   <title>Noms</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
   <%= csrf_meta_tags %>
 </head>
 <body>
 <%= render :partial => "partials/nav" %>
-
-<div class="row">
-      <div class="small-12 columns" id="main_content">
-        <%= yield %>
-     </div>
-</div>
+<%= yield %>
 
 </body>
 </html>
