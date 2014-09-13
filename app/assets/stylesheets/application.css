@@ -13,7 +13,13 @@
 
  *= require_tree .
  */
+#rottenfood {
+	right:0px;
+}
 
+#food{
+	left:300 px;
+}
 #newnom{
 	padding-top :30px;
 	font-size: 50px;
