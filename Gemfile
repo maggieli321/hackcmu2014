@@ -44,6 +44,10 @@ gem 'simple_form'
 
 gem 'foundation-rails'
 
+gem 'faker'
+
+gem 'factory_girl_rails'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
@@ -61,4 +65,3 @@ end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
-
