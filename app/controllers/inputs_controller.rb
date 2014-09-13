@@ -1,7 +1,7 @@
 class InputsController < ApplicationController
   before_action :set_input, only: [:show, :edit, :update, :destroy]
   before_action :check_login, only: [:new, :edit, :update, :destroy]
-  authorize_resource
+  #authorize_resource
   # GET /inputs
   # GET /inputs.json
   def index
@@ -23,11 +23,11 @@ class InputsController < ApplicationController
   def new
     @input = Input.new
     @input.user_id = current_user.id
-    authorize! :new, @input
+    #authorize! :new, @input
   end
 
   def edit
-    authorize! :edit, @input
+    #authorize! :edit, @input
   end
 
   def create
@@ -41,7 +41,7 @@ class InputsController < ApplicationController
   end
 
   def update
-    authorize! :update, @input
+    #authorize! :update, @input
     if @input.update(input_params)
       redirect_to @input, notice: "The nom #{@input.name} was revised in the system."
     else
@@ -50,7 +50,7 @@ class InputsController < ApplicationController
   end
 
   def destroy
-    authorize! :destroy, @input
+    #authorize! :destroy, @input
     @input.destroy
     redirect_to inputs_url, notice: "The nom #{@input.name} was removed from the system."
   end
