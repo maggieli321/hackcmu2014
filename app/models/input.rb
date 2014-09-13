@@ -10,6 +10,7 @@ class Input < ActiveRecord::Base
 
 	scope :upcoming, -> { where('date >= ?', Date.today) }
   	scope :rot, -> { where('date < ?', Date.today) }
+  	scope :chronological, -> { order('date') }
 
 
 

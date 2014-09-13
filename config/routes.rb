@@ -1,10 +1,13 @@
 Noms::Application.routes.draw do
   get "home/index"
   resources :foods
-
   resources :users
-
   resources :inputs
+    # set the root url
+   # semi-static routes
+  get 'home', to: 'home#home', as: :home
+  get 'logout' => 'sessions#destroy', :as => :logout
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
