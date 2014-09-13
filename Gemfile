@@ -32,7 +32,7 @@ gem 'validates_timeliness'
 
 gem 'chronic'
 
-gem 'bcrypt'
+gem 'bcrypt-ruby'
 
 gem 'cancancan', '1.7.0'
 
@@ -41,6 +41,12 @@ gem 'nested_form'
 gem 'will_paginate'
 
 gem 'simple_form'
+
+gem 'foundation-rails'
+
+gem 'faker'
+
+gem 'factory_girl_rails'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

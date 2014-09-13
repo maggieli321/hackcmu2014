@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140913055711) do
+ActiveRecord::Schema.define(version: 20140913095132) do
 
   create_table "foods", force: true do |t|
     t.string   "name"
@@ -34,10 +34,11 @@ ActiveRecord::Schema.define(version: 20140913055711) do
 
   create_table "users", force: true do |t|
     t.string   "username"
-    t.string   "password"
     t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "password_digest"
+    t.string   "role"
   end
 
 end

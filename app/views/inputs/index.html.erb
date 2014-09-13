@@ -17,6 +17,7 @@
   </thead>
 
   <tbody>
+    <% if !@inputs.blank? %>
     <% @inputs.each do |input| %>
       <tr>
         <td><%= input.food_id %></td>
@@ -30,6 +31,7 @@
         <td><%= link_to 'Edit', edit_input_path(input) %></td>
         <td><%= link_to 'Destroy', input, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
+    <% end %>
     <% end %>
   </tbody>
 </table>

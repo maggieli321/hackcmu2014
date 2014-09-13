@@ -20,9 +20,21 @@
     <%= f.password_field :password %>
   </div>
   <div class="field">
+    <%= f.label :password_confirmation, "Confirm Password" %><br>
+    <%= f.password_field :password_confirmation %>
+  </div>
+  <div class="field">
     <%= f.label :email %><br>
     <%= f.text_field :email %>
   </div>
+  <%# if logged_in? %>
+    <%# if current_user.role == 'admin' %>
+    <div class="field">
+        <%= f.label :role %><br>
+        <%= f.text_field :role %>
+    </div>
+  <%# end %>
+  <%# end %>
   <div class="actions">
     <%= f.submit (@user.new_record? ? "Sign up" : "Update")%>
   </div>

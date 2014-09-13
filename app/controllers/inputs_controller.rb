@@ -1,74 +1,63 @@
 class InputsController < ApplicationController
   before_action :set_input, only: [:show, :edit, :update, :destroy]
-
+  #before_action :check_login, only: [:new, :edit, :update, :destroy]
   # GET /inputs
   # GET /inputs.json
   def index
-    @inputs = Input.all
+    @upcoming_inputs = Input.upcoming.chronological
+    @rot_inputs = Input.past.chronological
+
   end
 
-  # GET /inputs/1
-  # GET /inputs/1.json
   def show
+    @upcoming_inputs = Input.upcoming.chronological
+    @rot_inputs = Input.past.chronological
+    # @hash = Gmaps4rails.build_markers(@camp.location) do |location, marker|
+    # marker.lat location.latitude
+    # marker.lng location.longitude
   end
 
-  # GET /inputs/new
   def new
+    
     @input = Input.new
+    authorize! :new, @input
   end
 
-  # GET /inputs/1/edit
   def edit
+    authorize! :edit, @input
   end
 
-  # POST /inputs
-  # POST /inputs.json
   def create
+    authorize! :create, @input
     @input = Input.new(input_params)
-
-    respond_to do |format|
-      if @input.save
-        format.html { redirect_to @input, notice: 'Input was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @input }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @input.errors, status: :unprocessable_entity }
-      end
+    if @cinput.save
+      redirect_to @input, notice: "The nom #{@input.name} was added to the system."
+    else
+      render action: 'new'
     end
   end
 
-  # PATCH/PUT /inputs/1
-  # PATCH/PUT /inputs/1.json
   def update
-    respond_to do |format|
-      if @input.update(input_params)
-        format.html { redirect_to @input, notice: 'Input was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @input.errors, status: :unprocessable_entity }
-      end
+    authorize! :update, @input
+    if @input.update(input_params)
+      redirect_to @input, notice: "The nom #{@input.name} was revised in the system."
+    else
+      render action: 'edit'
     end
   end
 
-  # DELETE /inputs/1
-  # DELETE /inputs/1.json
   def destroy
+    authorize! :destroy, @input
     @input.destroy
-    respond_to do |format|
-      format.html { redirect_to inputs_url }
-      format.json { head :no_content }
-    end
+    redirect_to inputs_url, notice: "The nom #{@input.name} was removed from the system."
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_input
+    def set_camp
       @input = Input.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def input_params
-      params.require(:input).permit(:food_id, :user_id, :date, :name, :quality, :exp_date, :num_days)
+      params.require(:input).permit(:food_id, :user_id, :date, :quality, :name, :exp_date, :num_days)
     end
 end

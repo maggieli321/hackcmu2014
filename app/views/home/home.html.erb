@@ -1,0 +1,6 @@
+<% if logged_in?  %>
+	<%= render :partial => 'user_home' %>
+
+<% else %>
+	<%= render :partial => 'login_home' %>
+<% end %>
