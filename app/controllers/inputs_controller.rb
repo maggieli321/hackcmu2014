@@ -31,7 +31,7 @@ class InputsController < ApplicationController
   end
 
   def create
-    authorize! :create, @input
+    # authorize! :create, @input
     @input = Input.new(input_params)
     if @input.save
       redirect_to @input, notice: "The nom #{@input.name} was added to the system."
