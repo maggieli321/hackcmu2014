@@ -7,7 +7,9 @@ class Input < ActiveRecord::Base
 	validates_numericality_of :food_id, :user_id, :num_days, greater_than: 0, only_integer: true
 	validates_date :date, on_or_after: Date.today
 	validates_date :exp_date, on_or_after: Date.today, allow_blank: true
-	validates_inclusion_of :quality, in: %w[Excellent, Ok, Bad]
+	validates_inclusion_of :quality, in: %w[Excellent Ok Bad]
+	validates_numericality_of :num_days, allow_blank: true
+	# validates :input_is_not_already_assigned_to_food, on: :create
 
 	scope :upcoming, -> { where('date >= ?', Date.today) }
 	scope :past, -> { where('date <= ?', Date.today)}
@@ -15,6 +17,7 @@ class Input < ActiveRecord::Base
   	scope :chronological, -> { order('date') }
 
 	def expiration_date
+
 		if !num_days.nil?
 			return Date.today + num_days
 		elsif !exp_date.nil? 
@@ -32,11 +35,22 @@ class Input < ActiveRecord::Base
 		end
 	end
 
+
+# private
+#   def input_is_not_already_assigned_to_food
+#     return true if self.food.nil?  || self.input.nil? 
+#     unless Input.where(food_id: self.food_id, input_id: self.input_id).to_a.empty?
+#       errors.add(:base, "Item is already in system")
+#     end
+#   end
+
+
 	def send_reminder
 		if Date.today == :expiration_date -1
 			ReminderMailer.food_reminder_msg(@user).deliver
       		flash[:notice] = "#{@user.username} has been notified by email." 
       	end
     end
+
 end
 
