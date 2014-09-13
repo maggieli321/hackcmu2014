@@ -18,7 +18,6 @@ namespace :db do
     apple = food.new
     apple.name = "apple"
     apple.shelf_life = 7
+    apple.save!
   end
-
-    
 end
