@@ -13,6 +13,8 @@
 
 <%# IF the item is not already in the food system%>
   <%# if @input.input_is_not_already_assigned_to_food == "true" %>
+        <%= f.input :user_id, :as => :hidden, :input_html => { :value => "#{@input.user_id}" } %>
+
         <div class="field">
           <%= f.label :name, label: "Food" %><br>
           <%= f.select :food_id, Food.all.map{|e| [e.name, e.id]}, prompt: "I have..." %>

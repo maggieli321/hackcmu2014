@@ -3,13 +3,14 @@ class Input < ActiveRecord::Base
 	belongs_to :food
 	belongs_to :user
 
-	validates_presence_of :food_id, :user_id, :date, :name, :quality
+	validates_presence_of :food_id, :user_id, :quality
 	validates_numericality_of :food_id, :user_id, :num_days, greater_than: 0, only_integer: true
 	validates_date :date, on_or_after: Date.today
 	validates_date :exp_date, on_or_after: Date.today, allow_blank: true
 	validates_inclusion_of :quality, in: %w[Excellent Ok Bad]
 	validates_numericality_of :num_days, allow_blank: true
 	# validates :input_is_not_already_assigned_to_food, on: :create
+	validates_presence_of :date, :name, on: :save
 
 	scope :upcoming, -> { where('date >= ?', Date.today) }
 	scope :past, -> { where('date <= ?', Date.today)}
@@ -17,7 +18,6 @@ class Input < ActiveRecord::Base
   	scope :chronological, -> { order('date') }
 
 	def expiration_date
-
 		if !num_days.nil?
 			return Date.today + num_days
 		elsif !exp_date.nil? 
@@ -33,6 +33,10 @@ class Input < ActiveRecord::Base
 		  	end
 		  	Date.today + self.food.shelf_life*modifier
 		end
+	end
+
+	def date
+		expiration_date
 	end
 
 
