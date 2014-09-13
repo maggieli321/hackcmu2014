@@ -14,11 +14,7 @@ class Input < ActiveRecord::Base
   	scope :rot, -> { where('date < ?', Date.today) }
   	scope :chronological, -> { order('date') }
 
-
-
-
-	def date
-
+	def expiration_date
 		if !num_days.nil?
 			return Date.today + num_days
 		elsif !exp_date.nil? 
@@ -36,5 +32,11 @@ class Input < ActiveRecord::Base
 		end
 	end
 
+	def send_reminder
+		if Date.today == :expiration_date -1
+			ReminderMailer.food_reminder_msg(@user).deliver
+      		flash[:notice] = "#{@user.username} has been notified by email." 
+      	end
+    end
 end
 
