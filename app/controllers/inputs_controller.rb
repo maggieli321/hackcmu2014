@@ -54,7 +54,7 @@ class InputsController < ApplicationController
   end
 
   private
-    def set_camp
+    def set_input
       @input = Input.find(params[:id])
     end
 

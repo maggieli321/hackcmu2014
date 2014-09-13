@@ -8,6 +8,7 @@ class Ability
       if user.role? :admin
         can :manage, :all
       else
+        can :read, Home
         can :read, Food
         can :read, :update, :Input do |i|
           inputs = user.inputs.map(&:user_id)
