@@ -16,24 +16,19 @@
         <%= f.input :user_id, :as => :hidden, :input_html => { :value => "#{@input.user_id}" } %>
 
         <div class="field">
-          <%= f.label :name, label: "Food" %><br>
-          <%= f.select :food_id, Food.all.map{|e| [e.name, e.id]}, prompt: "I have...", required: false %>
-        </div>
-<!--         <div class="field">
-          <%#= f.label :name, label: "Cannot find your food in the list?" %>
-          <%#= link_to "Enter your own!", render :partial => "form" %>
+          <%= f.label :name, label: "Cannot find your food in the list?" %>
           <%#= f.input :name, label: "Food", required: false %><br>
         </div>        
- -->        <div class="field">
+        <div class="field">
           <%= f.input :quality, collection: ['Excellent','Ok','Bad'], as: :radio_buttons, label: "Quality" %>        
         </div>
         <div class="field">
-          <%= f.label :exp_date, label: "Expiration date (optional)" %><br>
-          <%= f.date_select :exp_date, prompt: "Select", required: false, start_year: Date.today.year %>
+          <%= f.label :exp_date, label: "Expiration date" %><br>
+          <%= f.date_select :exp_date, prompt: "Select", required: false %>
         </div>
         <div class="field">
           <%= f.label :num_days, label: "I want to nom in ... days" %><br>
-          <%= f.input :num_days, required: false %>
+          <%= f.number_field :num_days, required: false %>
         </div>
         <div class="actions">
           <%= f.submit %>
