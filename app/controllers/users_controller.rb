@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  before_action :check_login, only: [:new, :edit, :update, :destroy]
+  #before_action :check_login, only: [:new, :edit, :update, :destroy]
 
   # GET /users
   # GET /users.json
@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    @mailreminder = reminder_mailer.food_reminder_msg(@user).deliver
+    #@mailreminder = ReminderMailer.food_reminder_msg(@user).deliver
   end
 
   # GET /users/new
@@ -31,6 +31,8 @@ class UsersController < ApplicationController
     if @user.save
       session[:user_id] = @user.id
       redirect_to(home_path, :notice => 'User was successfully created.')
+      ReminderMailer.food_reminder_msg(@user).deliver
+      flash[:notice] = "#{@user.username} has been notified by email."
     else
       flash[:error] = "This user could not be created."
         render "new"
@@ -86,6 +88,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:username, :password, :email)
+      params.require(:user).permit(:username, :password, :pasword_digest, :email, :role)
     end
 end

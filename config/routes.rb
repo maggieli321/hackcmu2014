@@ -3,7 +3,6 @@ Noms::Application.routes.draw do
   resources :foods
   resources :users
   resources :inputs
-  resources :users
   resources :sessions
   
   get 'user/edit' => 'users#edit', :as => :edit_current_user
