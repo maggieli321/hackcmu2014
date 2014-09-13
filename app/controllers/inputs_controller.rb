@@ -22,7 +22,7 @@ class InputsController < ApplicationController
 
   def new
     @input = Input.new
-    @input.user_id = current_user.id
+    @input.user_id = self.user.id
     authorize! :new, @input
   end
 
