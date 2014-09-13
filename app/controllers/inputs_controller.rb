@@ -1,74 +1,62 @@
 class InputsController < ApplicationController
   before_action :set_input, only: [:show, :edit, :update, :destroy]
 
-  # GET /inputs
-  # GET /inputs.json
   def index
-    @inputs = Input.all
+    @upcoming_inputs = Camp.upcoming.chronological
+    @rot_inputs = Camp.past.chronological
+
   end
 
-  # GET /inputs/1
-  # GET /inputs/1.json
   def show
+    @upcoming_inputs = Camp.upcoming.chronological
+    @rot_inputs = Camp.past.chronological
+    @hash = Gmaps4rails.build_markers(@camp.location) do |location, marker|
+    marker.lat location.latitude
+    marker.lng location.longitude
+    end
   end
 
-  # GET /inputs/new
   def new
-    @input = Input.new
+    
+    @camp = Camp.new
+    authorize! :new, @camp
   end
 
-  # GET /inputs/1/edit
   def edit
+    authorize! :edit, @camp
   end
 
-  # POST /inputs
-  # POST /inputs.json
   def create
-    @input = Input.new(input_params)
-
-    respond_to do |format|
-      if @input.save
-        format.html { redirect_to @input, notice: 'Input was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @input }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @input.errors, status: :unprocessable_entity }
-      end
+    authorize! :create, @camp
+    @camp = Camp.new(camp_params)
+    if @camp.save
+      redirect_to @camp, notice: "The camp #{@camp.name} (on #{@camp.start_date.strftime('%m/%d/%y')}) was added to the system."
+    else
+      render action: 'new'
     end
   end
 
-  # PATCH/PUT /inputs/1
-  # PATCH/PUT /inputs/1.json
   def update
-    respond_to do |format|
-      if @input.update(input_params)
-        format.html { redirect_to @input, notice: 'Input was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @input.errors, status: :unprocessable_entity }
-      end
+    authorize! :update, @camp
+    if @camp.update(camp_params)
+      redirect_to @camp, notice: "The camp #{@camp.name} (on #{@camp.start_date.strftime('%m/%d/%y')}) was revised in the system."
+    else
+      render action: 'edit'
     end
   end
 
-  # DELETE /inputs/1
-  # DELETE /inputs/1.json
   def destroy
-    @input.destroy
-    respond_to do |format|
-      format.html { redirect_to inputs_url }
-      format.json { head :no_content }
-    end
+    authorize! :destroy, @camp
+    @camp.destroy
+    redirect_to camps_url, notice: "#{@camp.name} camp on #{@camp.start_date.strftime('%m/%d/%y')} was removed from the system."
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_input
-      @input = Input.find(params[:id])
+    def set_camp
+      @camp = Camp.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def input_params
-      params.require(:input).permit(:food_id, :user_id, :date, :name, :quality, :exp_date, :num_days)
+    def camp_params
+      params.require(:camp).permit(:curriculum_id, :location_id, :cost, :start_date, :end_date, :time_slot, :max_students, :active, :instructor_ids => [])
     end
 end

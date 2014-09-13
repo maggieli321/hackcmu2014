@@ -8,10 +8,14 @@ class Input < ActiveRecord::Base
 	validates_date :date, :exp_date, on_or_after: Date.today
 	validates_numericality_of :quality, greater_than_or_equal_to: 0, less_than: 3
 
+	scope :upcoming, -> { where('date >= ?', Date.today) }
+  	scope :rot, -> { where('date < ?', Date.today) }
 
-end
+
 
 
 def date
 	return Date.today
+end
+
 end
