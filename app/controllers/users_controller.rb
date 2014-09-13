@@ -11,6 +11,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    @mailreminder = reminder_mailer.food_reminder_msg(@user).deliver
   end
 
   # GET /users/new
