@@ -7,6 +7,7 @@ class InputsController < ApplicationController
   def index
     @upcoming_inputs = Input.upcoming.chronological
     @rot_inputs = Input.past.chronological
+    @quality = ['Excellent','Ok','Bad']
 
   end
 
@@ -19,7 +20,6 @@ class InputsController < ApplicationController
   end
 
   def new
-    
     @input = Input.new
     authorize! :new, @input
   end
@@ -31,7 +31,7 @@ class InputsController < ApplicationController
   def create
     authorize! :create, @input
     @input = Input.new(input_params)
-    if @cinput.save
+    if @input.save
       redirect_to @input, notice: "The nom #{@input.name} was added to the system."
     else
       render action: 'new'
