@@ -13,6 +13,7 @@
 
 <%# IF the item is not already in the food system%>
   <%# if @input.input_is_not_already_assigned_to_food == "true" %>
+        <%= f.input :name,  required: false, label: "Name" %> 
         <div class="field">
           <%= f.label :name, label: "Food" %><br>
           <%= f.select :food_id, Food.all.map{|e| [e.name, e.id]}, prompt: "I have..." %>
@@ -22,7 +23,7 @@
         </div>
         <div class="field">
           <%= f.label :exp_date, label: "Expiration date (optional)" %><br>
-          <%= f.date_select :exp_date, prompt: "Select", required: false %>
+          <%= f.date_select :exp_date, prompt: "Select", required: false, start_year: Date.today.year%>
         </div>
         <div class="field">
           <%= f.label :num_days, label: "I want to nom in ... days" %><br>
