@@ -15,7 +15,25 @@ class Input < ActiveRecord::Base
 
 
 def date
-	return Date.today
-end
+
+	if !num_days.nil?
+		return Date.today + num_days
+	elsif !exp_date.nil? 
+		return exp_date
+	end
+	else
+		case self.quality
+		when 0 # bad quality
+	    	modifier = 0.33
+		when 1 # ok quality
+	    	modifier = 0.67
+	 	else # excellent quality
+	    	modifier = 1.0
+	  	end
+	  	Date.today + self.food.shelf_life*modifier
+	  	end
+	  end
 
 end
+
+
