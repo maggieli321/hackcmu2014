@@ -7,12 +7,13 @@ class UsersController < ApplicationController
   # GET /users.json
   def index
     @users = User.all
+    @reminder = ReminderMailer.food_reminder_msg(@user).deliver
+      #flash[:notice] = "#{@user.username} has been notified by email."
   end
 
   # GET /users/1
   # GET /users/1.json
   def show
-    #@mailreminder = ReminderMailer.food_reminder_msg(@user).deliver
   end
 
   # GET /users/new
@@ -32,8 +33,6 @@ class UsersController < ApplicationController
     if @user.save
       session[:user_id] = @user.id
       redirect_to(home_path, :notice => 'User was successfully created.')
-      ReminderMailer.food_reminder_msg(@user).deliver
-      flash[:notice] = "#{@user.username} has been notified by email."
     else
       flash[:error] = "This user could not be created."
         render "new"
@@ -80,6 +79,7 @@ class UsersController < ApplicationController
     #   format.json { head :no_content }
     # end
   end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
