@@ -1,4 +1,3 @@
-
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -43,6 +42,8 @@ gem 'will_paginate'
 
 gem 'simple_form'
 
+gem 'foundation-rails'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
@@ -60,4 +61,4 @@ end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
-
+>>>>>>> 8b8fd1355ad8531c83075fd7ba1df49d4cd8462e
