@@ -14,6 +14,20 @@
  *= require_tree .
  */
 
+#newnom{
+	padding-top :30px;
+	font-size: 50px;
+	color:#33CC99;
+	font-family: 'Lobster', cursive;
+	text-align: center;
+
+}
+#jumbotron{
+	width:100%;
+	height:45%;
+	background-image: url("kids.jpg"); 
+}
+
 #homepage{
 
 	text-align: center;
@@ -24,6 +38,10 @@
 	background: rgba(255,255,255,0.5);
 	right: 200px;
 	padding: 20px;
+}
+
+#dash1{
+	padding-top : 30px;
 }
 	
 nav.top-bar {
@@ -51,6 +69,7 @@ font-weight: 400;
 
 #main_content{
 	font-family: 'Ubuntu', sans-serif;
+	font-size: 15px;
 }
 
 #background-image {

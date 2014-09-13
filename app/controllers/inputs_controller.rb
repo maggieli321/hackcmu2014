@@ -7,6 +7,7 @@ class InputsController < ApplicationController
   def index
     @upcoming_inputs = Input.upcoming.chronological
     @rot_inputs = Input.past.chronological
+    @inputorder = Input.chronological
     @quality = ['Excellent','Ok','Bad']
 
   end
