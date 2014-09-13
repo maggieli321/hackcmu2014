@@ -12,7 +12,7 @@
         ]);
 
         var options = {
-          title: 'My Daily Activities'
+          title: 'My Nom analysis'
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('piechart'));
@@ -24,17 +24,20 @@
   <div class="small-2 large-4 columns"><div id="piechart" style="width: 500px; height: 500px;"></div></div>
   <div class="small-4 large-4 columns">
     <div class="small-4 large-4 columns">
+      <% if !@rot_inputs.blank? %>
+    </br>
     <p> Do you have rotten noms? </p>
     <table id = "dash1">
       
 
   <tbody>
-    <% if !@rot_inputs.blank? %>
+    
     <% @rot_inputs.each do |input| %>
       <tr>
         <td><%= link_to input.name, input %></td>
         <td><%= input.quality %></td>
         <td><%= input.exp_date %></td>
+        <td><%= input.num_days %> </td>
         <td><%= link_to 'Edit', edit_input_path(input) %></td>
 
       </tr>
@@ -44,6 +47,7 @@
 </table>
 </div></div>
   <div class="small-6 large-4 columns">
+  </br>
     <p> Fresh noms you can enjoy! </p><table id = "dash1">
     
   <tbody>
@@ -51,6 +55,7 @@
     <% @upcoming_inputs.each do |input| %>
       <tr>
         <td><%= link_to input.food.name, input %></td>
+         <td><%= input.num_days %> </td>
         <td><%= input.quality %></td>
         <td><%= input.exp_date %></td>
         <td><%= link_to 'Edit', edit_input_path(input) %></td>
