@@ -3,7 +3,7 @@ class CreateInputs < ActiveRecord::Migration
     create_table :inputs do |t|
       t.integer :food_id
       t.integer :user_id
-      t.datetime :date
+      t.date :date
       t.string :name
       t.integer :quality
       t.date :exp_date
