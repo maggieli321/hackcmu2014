@@ -1,6 +1,17 @@
-<% if logged_in?  %>
-	<%= render :partial => 'user_home' %>
+<%= image_tag 'background.jpg', id: "background-image"%>
+<div class="row">
+      <div class="small-12 columns" id="main_content">
+<div id = "homepage">
+<p id= "home">Got Noms?</p>
 
-<% else %>
-	<%= render :partial => 'login_home' %>
-<% end %>
+<p id ="homeside">
+<%= link_to "click here to login", login_path %> | <%= link_to "click here to register", new_user_path %></p>
+</div>
+
+<div class="small-1 columns">
+    &nbsp;
+</div>
+
+
+</div>
+</div>
