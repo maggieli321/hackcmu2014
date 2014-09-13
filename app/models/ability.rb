@@ -7,19 +7,26 @@ class Ability
       user ||= User.new # guest user (not logged in)
       if user.role? :admin
         can :manage, :all
-      else
+      elsif user.role? :member
         can :read, Food
-        can :read, Input do |i|
-          inputs = user.inputs.map(&:user_id)
-          inputs.include?(i.id)
+        can :read, Input
+        can :add, Input
+        can :update, Input
+        # can :read, Input do |i|
+        #   inputs = user.inputs.map(&:user_id)
+        #   inputs.include?(i.id)
+        # end
+
+        # can :update, Input do |i|
+        #   inputs = user.inputs.map(&:user_id)
+        #   inputs.include?(i.id)
+        # end
+
+        can :read, User do |u|
+          u.id == user.id
         end
 
-        can :update, Input do |i|
-          inputs = user.inputs.map(&:user_id)
-          inputs.include?(i.id)
-        end
-
-        can :update, User do |u|
+         can :update, User do |u|
           u.id == user.id
         end
       end
