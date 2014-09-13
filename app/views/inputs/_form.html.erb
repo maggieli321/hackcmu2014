@@ -13,7 +13,10 @@
 
 <%# IF the item is not already in the food system%>
   <%# if @input.input_is_not_already_assigned_to_food == "true" %>
-
+        <%= f.input :id, :as => :hidden, :input_html => {
+        :value => @user.id,
+        :id => current_user.id
+      } %>
         <%= f.input :name,  required: false, label: "Name" %> 
         <div class="field">
           <%= f.label :name, label: "Food" %><br>
