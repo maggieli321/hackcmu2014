@@ -12,7 +12,7 @@
   </thead>
 
   <tbody>
-    <% @foods.each do |food| %>
+    <% @foods.alphabetical.each do |food| %>
       <tr>
         <td><%= food.name %></td>
         <td><%= food.shelf_life %></td>
