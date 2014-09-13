@@ -3,7 +3,7 @@ class Input < ActiveRecord::Base
 	belongs_to :food
 	belongs_to :user
 
-	validates_presence_of :food_id, :user_id, :quality
+	validates_presence_of :user_id, :quality
 	validates_numericality_of :food_id, :user_id, :num_days, greater_than: 0, only_integer: true
 	validates_date :date, on_or_after: Date.today
 	validates_date :exp_date, on_or_after: Date.today, allow_blank: true
