@@ -65,7 +65,3 @@ end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
-<<<<<<< HEAD
-=======
-
->>>>>>> 87cd309804466b176dfd3099d56654d0f3259531

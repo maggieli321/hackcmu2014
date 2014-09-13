@@ -27,14 +27,14 @@
     <%= f.label :email %><br>
     <%= f.text_field :email %>
   </div>
-<!--   <% if logged_in? %>
-    <% if current_user.role == 'admin' %> -->
+  <%# if logged_in? %>
+    <%# if current_user.role == 'admin' %>
     <div class="field">
         <%= f.label :role %><br>
         <%= f.text_field :role %>
     </div>
-<!--     <% end %>
-  <% end %> -->
+  <%# end %>
+  <%# end %>
   <div class="actions">
     <%= f.submit (@user.new_record? ? "Sign up" : "Update")%>
   </div>
