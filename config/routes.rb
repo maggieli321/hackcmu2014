@@ -1,4 +1,5 @@
 Noms::Application.routes.draw do
+  get "home/index"
   resources :foods
 
   resources :users
