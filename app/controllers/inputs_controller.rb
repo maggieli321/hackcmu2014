@@ -1,12 +1,13 @@
 class InputsController < ApplicationController
   before_action :set_input, only: [:show, :edit, :update, :destroy]
   before_action :check_login, only: [:new, :edit, :update, :destroy]
-  authorize_resource
+  #authorize_resource
   # GET /inputs
   # GET /inputs.json
   def index
     @upcoming_inputs = Input.upcoming.chronological
-    @rot_inputs = Input.past.chronological
+    @rot_inputs = Input.rot.chronological
+    @inputorder = Input.chronological
     @quality = ['Excellent','Ok','Bad']
 
   end
@@ -21,25 +22,31 @@ class InputsController < ApplicationController
 
   def new
     @input = Input.new
-    authorize! :new, @input
+    @input.user_id = current_user.id
+    #authorize! :new, @input
   end
 
   def edit
-    authorize! :edit, @input
+    #authorize! :edit, @input
   end
 
   def create
-    authorize! :create, @input
+    # authorize! :create, @input
     @input = Input.new(input_params)
     if @input.save
+
+     # ReminderMailer.food_reminder_msg(User.to_a.select{|c| c.user_id = @input.user_id}).deliver
+      
+      
       redirect_to @input, notice: "The nom #{@input.name} was added to the system."
+      ReminderMailer.food_reminder_msg(@input.user).deliver
     else
       render action: 'new'
     end
   end
 
   def update
-    authorize! :update, @input
+    #authorize! :update, @input
     if @input.update(input_params)
       redirect_to @input, notice: "The nom #{@input.name} was revised in the system."
     else
@@ -48,7 +55,7 @@ class InputsController < ApplicationController
   end
 
   def destroy
-    authorize! :destroy, @input
+    #authorize! :destroy, @input
     @input.destroy
     redirect_to inputs_url, notice: "The nom #{@input.name} was removed from the system."
   end
