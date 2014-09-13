@@ -14,18 +14,22 @@
  *= require_tree .
  */
 
-
+h2{
+	font-family: 'Lobster', cursive;
+}
 .name{
 	height:40px;
 }
 
 #background-image {
-margin-top: -1em;
-left: 10px;
 transition: .5s;
 z-index: 0;
 width: 100%;
-opacity: .25;
-height: 760px;
+opacity: 1;
+height: 720px;
 position: absolute;
+}
+
+#background-image:hover {
+    opacity: 0.6;
 }

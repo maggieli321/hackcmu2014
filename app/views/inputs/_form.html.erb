@@ -17,8 +17,7 @@
     <%= f.text_field :name %>
   </div>
   <div class="field">
-      <%= f.label :quality %><br>
-      <%= f.input :quality, collection: ['Excellent','Ok','Bad'], as: :radio_buttons, label: "" %>
+      <%= f.input :quality, collection: ['Excellent','Ok','Bad'], as: :radio_buttons, label: "Quality" %>
   </div>
   <div class="field">
     <%= f.label :exp_date, label: "Expiration date (optional)" %><br>
