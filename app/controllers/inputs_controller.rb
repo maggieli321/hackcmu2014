@@ -1,64 +1,63 @@
 class InputsController < ApplicationController
   before_action :set_input, only: [:show, :edit, :update, :destroy]
-  before_action :check_login, only: [:new, :edit, :update, :destroy]
+  #before_action :check_login, only: [:new, :edit, :update, :destroy]
   # GET /inputs
   # GET /inputs.json
   def index
-    @upcoming_inputs = Camp.upcoming.chronological
-    @rot_inputs = Camp.past.chronological
+    @upcoming_inputs = Input.upcoming.chronological
+    @rot_inputs = Input.past.chronological
 
   end
 
   def show
-    @upcoming_inputs = Camp.upcoming.chronological
-    @rot_inputs = Camp.past.chronological
-    @hash = Gmaps4rails.build_markers(@camp.location) do |location, marker|
-    marker.lat location.latitude
-    marker.lng location.longitude
-    end
+    @upcoming_inputs = Input.upcoming.chronological
+    @rot_inputs = Input.past.chronological
+    # @hash = Gmaps4rails.build_markers(@camp.location) do |location, marker|
+    # marker.lat location.latitude
+    # marker.lng location.longitude
   end
 
   def new
     
-    @camp = Camp.new
-    authorize! :new, @camp
+    @input = Input.new
+    authorize! :new, @input
   end
 
   def edit
-    authorize! :edit, @camp
+    authorize! :edit, @input
   end
 
   def create
-    authorize! :create, @camp
-    @camp = Camp.new(camp_params)
-    if @camp.save
-      redirect_to @camp, notice: "The camp #{@camp.name} (on #{@camp.start_date.strftime('%m/%d/%y')}) was added to the system."
+    authorize! :create, @input
+    @input = Input.new(input_params)
+    if @cinput.save
+      redirect_to @input, notice: "The nom #{@input.name} was added to the system."
     else
       render action: 'new'
     end
   end
 
   def update
-    authorize! :update, @camp
-    if @camp.update(camp_params)
-      redirect_to @camp, notice: "The camp #{@camp.name} (on #{@camp.start_date.strftime('%m/%d/%y')}) was revised in the system."
+    authorize! :update, @input
+    if @input.update(input_params)
+      redirect_to @input, notice: "The nom #{@input.name} was revised in the system."
     else
       render action: 'edit'
     end
   end
 
   def destroy
-    authorize! :destroy, @camp
-    @camp.destroy
-    redirect_to camps_url, notice: "#{@camp.name} camp on #{@camp.start_date.strftime('%m/%d/%y')} was removed from the system."
+    authorize! :destroy, @input
+    @input.destroy
+    redirect_to inputs_url, notice: "The nom #{@input.name} was removed from the system."
   end
 
   private
     def set_camp
-      @camp = Camp.find(params[:id])
+      @input = Input.find(params[:id])
     end
 
-    def camp_params
-      params.require(:camp).permit(:curriculum_id, :location_id, :cost, :start_date, :end_date, :time_slot, :max_students, :active, :instructor_ids => [])
+    def input_params
+      params.require(:input).permit(:food_id, :user_id, :date, :quality, :name, :exp_date, :num_days)
     end
 end
