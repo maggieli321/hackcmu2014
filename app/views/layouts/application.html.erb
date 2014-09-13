@@ -26,3 +26,23 @@
 
 </body>
 </html>
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Noms</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<%= render :partial => "partials/nav" %>
+
+<div class="row">
+      <div class="small-12 columns" id="main_content">
+        <%= yield %>
+     </div>
+</div>
+
+</body>
+</html>
+
