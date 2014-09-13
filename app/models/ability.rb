@@ -9,7 +9,8 @@ class Ability
         can :manage, :all
       else
         can :read, Food
-        #can :read, Input
+        can :read, Input
+        can :manage, :all #change later
       end
     #
     # The first argument to `can` is the action you are giving the user
