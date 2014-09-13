@@ -16,8 +16,8 @@ class Input < ActiveRecord::Base
   	scope :rot, -> { where('date < ?', Date.today) }
   	scope :chronological, -> { order('date') }
 
+	def expiration_date
 
-	def date
 		if !num_days.nil?
 			return Date.today + num_days
 		elsif !exp_date.nil? 
@@ -35,6 +35,7 @@ class Input < ActiveRecord::Base
 		end
 	end
 
+
 # private
 #   def input_is_not_already_assigned_to_food
 #     return true if self.food.nil?  || self.input.nil? 
@@ -42,6 +43,14 @@ class Input < ActiveRecord::Base
 #       errors.add(:base, "Item is already in system")
 #     end
 #   end
+
+
+	def send_reminder
+		if Date.today == :expiration_date -1
+			ReminderMailer.food_reminder_msg(@user).deliver
+      		flash[:notice] = "#{@user.username} has been notified by email." 
+      	end
+    end
 
 end
 
