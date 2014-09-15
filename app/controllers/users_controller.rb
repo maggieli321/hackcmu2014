@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  authorize_resource
+  #authorize_resource
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :check_login, only: [:new, :edit, :update, :destroy]
 
@@ -94,3 +94,4 @@ class UsersController < ApplicationController
       params.require(:user).permit(:username, :password, :password_confirmation, :email, :role)
     end
 end
+
